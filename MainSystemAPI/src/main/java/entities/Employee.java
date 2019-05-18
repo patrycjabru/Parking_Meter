@@ -1,3 +1,4 @@
+package entities;
 import javax.persistence.*;
 
 @Entity(name = "employee")

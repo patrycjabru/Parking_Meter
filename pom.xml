@@ -9,6 +9,9 @@
         <module>MainSystemAPI</module>
         <module>MainSystemImpl</module>
         <module>MainSystemWebApp</module>
+        <module>ParkingMeter</module>
+        <module>ParkingSensor</module>
+        <module>ManagementApp</module>
     </modules>
 
     <groupId>Parking_Meter</groupId>
@@ -39,14 +42,6 @@
             <groupId>org.jboss.spec.javax.jms</groupId>
             <artifactId>jboss-jms-api_2.0_spec</artifactId>
             <version>1.0.0.Final</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-jms-client-bom -->
-        <dependency>
-            <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-jms-client-bom</artifactId>
-            <version>10.1.0.Final</version>
-            <type>pom</type>
         </dependency>
     </dependencies>
 

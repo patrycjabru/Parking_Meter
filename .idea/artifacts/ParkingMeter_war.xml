@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ParkingMeter:war">
-    <output-path>$PROJECT_DIR$/ParkingMeter/target</output-path>
-    <root id="archive" name="ParkingMeter-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="ParkingMeter:war exploded" />
-    </root>
-  </artifact>
-</component>

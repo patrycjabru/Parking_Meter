@@ -1,6 +1,9 @@
 package entities;
+import org.hibernate.dialect.Database;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity(name = "parking_spot")
@@ -13,6 +16,9 @@ public class ParkingSpot {
 
     @Column(nullable = false, name = "is_free")
     private Boolean isFree;
+
+    @Column(nullable = true, name = "arrival_time")
+    private Date arrivalTime;
 
     @ManyToOne
     @JoinColumn(name = "zone_id")
@@ -51,5 +57,21 @@ public class ParkingSpot {
 
     public void setZone(Zone zone) {
         this.zone = zone;
+    }
+
+    public Date getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(Date arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

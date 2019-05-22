@@ -18,11 +18,11 @@ public class TicketDAO {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("DataSource");;
     private static EntityManager em = factory.createEntityManager();
 
-    public void add(Object o) {
+    public static void add(Object o) {
         DatabaseOperationHelper.add(o, em);
     }
 
-    public Ticket getById(int id) {
+    public static Ticket getById(int id) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Ticket> query = cb.createQuery(Ticket.class);
         Root<Ticket> hh = query.from(Ticket.class);
@@ -45,7 +45,7 @@ public class TicketDAO {
         return tickets.get(0);
     }
 
-    public void deleteById(int id) {
+    public static void deleteById(int id) {
         try {
             Ticket foundEmployee = em.find(Ticket.class, id);
             DatabaseOperationHelper.delete(foundEmployee, em);

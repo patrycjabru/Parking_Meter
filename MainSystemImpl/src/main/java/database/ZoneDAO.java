@@ -18,11 +18,11 @@ public class ZoneDAO {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("DataSource");;
     private static EntityManager em = factory.createEntityManager();
 
-    public void add(Object o) {
+    public static void add(Object o) {
         DatabaseOperationHelper.add(o, em);
     }
 
-    public Zone getById(int id) {
+    public static Zone getById(int id) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Zone> query = cb.createQuery(Zone.class);
         Root<Zone> hh = query.from(Zone.class);
@@ -45,7 +45,7 @@ public class ZoneDAO {
         return zones.get(0);
     }
 
-    public void deleteById(int id) {
+    public static void deleteById(int id) {
         try {
             Zone foundEmployee = em.find(Zone.class, id);
             DatabaseOperationHelper.delete(foundEmployee, em);

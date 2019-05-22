@@ -18,11 +18,11 @@ public class EmployeeDAO {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("DataSource");;
     private static EntityManager em = factory.createEntityManager();
 
-    public void add(Object o) {
+    public static void add(Object o) {
         DatabaseOperationHelper.add(o, em);
     }
 
-    public Employee getById(int id) {
+    public static Employee getById(int id) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Employee> query = cb.createQuery(Employee.class);
         Root<Employee> hh = query.from(Employee.class);
@@ -45,7 +45,7 @@ public class EmployeeDAO {
         return employees.get(0);
     }
 
-    public void deleteById(int id) {
+    public static void deleteById(int id) {
         try {
             Employee foundEmployee = em.find(Employee.class, id);
             DatabaseOperationHelper.delete(foundEmployee, em);
@@ -56,7 +56,7 @@ public class EmployeeDAO {
         }
     }
 
-    public void updateZone(int id, int zone_id) {
+    public static void updateZone(int id, int zone_id) {
         try {
             Employee foundEmployee = em.find(Employee.class, id);
             Zone foundZone = em.find(Zone.class, zone_id);

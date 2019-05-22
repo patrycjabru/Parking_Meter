@@ -2,6 +2,7 @@ package entities;
 import org.hibernate.dialect.Database;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,13 +19,12 @@ public class ParkingSpot {
     private Boolean isFree;
 
     @Column(nullable = true, name = "arrival_time")
-    private Date arrivalTime;
+    private Timestamp arrivalTime;
 
     @ManyToOne
-    @JoinColumn(name = "zone_id")
     private Zone zone;
 
-    @OneToMany(mappedBy = "parking_spot", orphanRemoval = true, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "parkingSpot", orphanRemoval = true, cascade = CascadeType.REMOVE)
     private List<Ticket> tickets = new ArrayList<Ticket>();
 
     public ParkingSpot() {
@@ -63,7 +63,7 @@ public class ParkingSpot {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Date arrivalTime) {
+    public void setArrivalTime(Timestamp arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 

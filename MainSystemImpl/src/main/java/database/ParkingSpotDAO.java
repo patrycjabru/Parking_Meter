@@ -12,6 +12,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +22,7 @@ public class ParkingSpotDAO {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("DataSource");;
     private static EntityManager em = factory.createEntityManager();
 
-    public void add(Object o, int zone_id) {
+    public static void add(Object o, int zone_id) {
         try {
             Zone foundEmployee = em.find(Zone.class, zone_id);
         } catch (Exception e) {
@@ -28,7 +31,7 @@ public class ParkingSpotDAO {
         }
     }
 
-    public ParkingSpot getById(int id) {
+    public static ParkingSpot getById(int id) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<ParkingSpot> query = cb.createQuery(ParkingSpot.class);
         Root<ParkingSpot> hh = query.from(ParkingSpot.class);
@@ -51,7 +54,7 @@ public class ParkingSpotDAO {
         return spots.get(0);
     }
 
-    public void deleteById(int id) {
+    public static void deleteById(int id) {
         try {
             ParkingSpot foundSpot = em.find(ParkingSpot.class, id);
             DatabaseOperationHelper.delete(foundSpot, em);
@@ -59,6 +62,37 @@ public class ParkingSpotDAO {
         catch (Exception e) {
             System.err.println("Error when trying to deleteById data from database: " + e);
             em.getTransaction().rollback();
+        }
+    }
+
+    public static void setSpotAsOccupied(int spot_id) {
+        try{
+            ParkingSpot foundSpot = em.find(ParkingSpot.class, spot_id);
+            Date date = new Date();
+            long time = date.getTime();
+            Timestamp ts = new Timestamp(time);
+
+            em.getTransaction().begin();
+            foundSpot.setArrivalTime(ts);
+            foundSpot.setFree(false);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            System.err.println("Error when trying to update data in database: " + e);
+        }
+    }
+
+    public static void setSpotAsFree(int spot_id) {
+        try{
+            ParkingSpot foundSpot = em.find(ParkingSpot.class, spot_id);
+
+            em.getTransaction().begin();
+            foundSpot.setArrivalTime(null);
+            foundSpot.setFree(true);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            System.err.println("Error when trying to update data in database: " + e);
         }
     }
 }

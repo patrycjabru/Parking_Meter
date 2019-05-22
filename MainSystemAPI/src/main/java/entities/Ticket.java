@@ -7,7 +7,7 @@ import java.util.Date;
 public class Ticket {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private int id;
 

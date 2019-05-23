@@ -1,30 +1,29 @@
+package entities;
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity(name = "ticket")
 public class Ticket {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private int id;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "start_time", nullable = false)
-    private Date startTime;
+    private Timestamp startTime;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_time", nullable = false)
-    private Date endTime;
+    private Timestamp endTime;
 
     @ManyToOne
-    @JoinColumn(name = "parking_spot_id")
     private ParkingSpot parkingSpot;
 
     public Ticket() {
     }
 
-    public Ticket(Date startTime, Date endTime, ParkingSpot parkingSpot) {
+    public Ticket(Timestamp startTime, Timestamp endTime, ParkingSpot parkingSpot) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.parkingSpot = parkingSpot;
@@ -42,7 +41,7 @@ public class Ticket {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
@@ -50,7 +49,7 @@ public class Ticket {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
     }
 

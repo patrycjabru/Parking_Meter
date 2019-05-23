@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xml:lang="en" lang="en">
+<head>
+    <title>Parking Meter</title>
+</head>
+<body>
+    <h:form>
+        Spot id: <br/>
+        <h:inputText binding="#{spot_id}"/><br/>
+        How long? <br/>
+        <h:selectOneMenu binding="#{duration}">
+            <f:selectItem itemValue="1" itemLabel="1 hour"/>
+            <f:selectItem itemValue="2" itemLabel="2 hours"/>
+            <f:selectItem itemValue="3" itemLabel="3 hours"/>
+            <f:selectItem itemValue="6" itemLabel="6 hours"/>
+            <f:selectItem itemValue="12" itemLabel="12 hours"/>
+            <f:selectItem itemValue="24" itemLabel="1 day"/>
+            <f:selectItem itemValue="48" itemLabel="2 day"/>
+            <f:selectItem itemValue="72" itemLabel="3 day"/>
+            <f:selectItem itemValue="168" itemLabel="7 day"/>
+        </h:selectOneMenu><br/>
+        <h:commandButton label="Buy" value="Buy" action="#{parkingBean.buyTicket(spot_id.value,duration.value)}"/>
+    </h:form>
+
+</body>
+</html>

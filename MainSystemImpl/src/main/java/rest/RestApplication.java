@@ -10,6 +10,7 @@ public class RestApplication extends Application{
     private Set<Object> singletons = new HashSet<Object>();
     public RestApplication() {
         singletons.add(new TicketService());
+        singletons.add(new SpotService());
     }
     @Override
     public Set<Object> getSingletons() {

@@ -10,7 +10,9 @@
 <body>
     <h:form>
         Spot id: <br/>
-        <h:inputText binding="#{spot_id}"/><br/>
+        <h:selectOneMenu binding="#{spot_id}">
+            <f:selectItems value="#{parkingBean.spotsIds}"/>
+        </h:selectOneMenu><br/>
         How long? <br/>
         <h:selectOneMenu binding="#{duration}">
             <f:selectItem itemValue="1" itemLabel="1 hour"/>

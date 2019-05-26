@@ -1,11 +1,12 @@
 package entities;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity(name = "zone")
-public class Zone {
+public class Zone implements Serializable {
 
     @Id
     @GeneratedValue

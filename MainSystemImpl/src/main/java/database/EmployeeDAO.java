@@ -45,6 +45,29 @@ public class EmployeeDAO {
         return employees.get(0);
     }
 
+    public static Employee getByName(String name){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Employee> query = cb.createQuery(Employee.class);
+        Root<Employee> hh = query.from(Employee.class);
+        List<Predicate> predicates = new LinkedList<Predicate>();
+
+        predicates.add(cb.equal(hh.get("name"), name));
+
+        query.where(predicates.toArray(new Predicate[] {}));
+
+        List<Employee> employees = new LinkedList<Employee>();
+        try {
+            TypedQuery<Employee> q = em.createQuery(query);
+            employees = q.getResultList();
+        }
+        catch (Exception e) {
+            System.err.println("Error when trying to retrieve data from database: " + e);
+        }
+        if (employees==null || employees.size()!=1)
+            return null;
+        return employees.get(0);
+    }
+
     public static void deleteById(int id) {
         try {
             Employee foundEmployee = em.find(Employee.class, id);

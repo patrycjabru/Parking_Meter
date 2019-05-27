@@ -1,10 +1,13 @@
 package login;
 
 import entities.Employee;
+import org.jboss.annotation.security.SecurityDomain;
 import service.DatabaseController;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;

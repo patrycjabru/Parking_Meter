@@ -53,6 +53,7 @@
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: jboss:jboss-annotations-ejb3:4.2.2.GA" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.spec.javax.jms:jboss-jms-api_2.0_spec:1.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.2" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />

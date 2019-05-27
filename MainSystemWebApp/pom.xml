@@ -27,6 +27,15 @@
             <version>2.3</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jboss/jboss-annotations-ejb3 -->
+        <dependency>
+            <groupId>jboss</groupId>
+            <artifactId>jboss-annotations-ejb3</artifactId>
+            <version>4.2.2.GA</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

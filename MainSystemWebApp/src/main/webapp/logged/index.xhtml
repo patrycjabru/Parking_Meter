@@ -10,8 +10,30 @@
 </head>
 <body>
     <h1>Jesteś zalogowany #{auth.getEmployeeName()} </h1>
-    <a href="../employee/index_employee.xhtml">Panel pracowniczy</a>
-    <a href="../admin/index_admin.xhtml">Panel admina</a>
+
+    <h:form>
+        <h:dataTable value="#{auth.parkingStatus}" var="status" styleClass="order-table"
+                     headerClass="order-table-header"
+                     rowClasses="order-table-odd-row,order-table-even-row" style="border-spacing: 8px">
+            <h:column>
+                <f:facet name="header">Strefa</f:facet>
+                #{status.zoneId}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Miejsce</f:facet>
+                #{status.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Stan</f:facet>
+                #{status.free}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Opłacony</f:facet>
+                #{status.paid}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
 </body>
 
 </html>

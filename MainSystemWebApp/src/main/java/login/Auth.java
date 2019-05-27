@@ -1,23 +1,24 @@
 package login;
 
 import entities.Employee;
-import org.jboss.annotation.security.SecurityDomain;
+import entities.UISpot;
 import service.DatabaseController;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.security.Principal;
+import java.util.List;
 
 @ManagedBean
 @SessionScoped
 public class Auth {
 
     private Employee employee; // The JPA entity.
+
+    private List<UISpot> parkingStatus;
 
     @EJB(lookup = "java:global/MainSystemImpl-1.0/DatabaseControllerBean!service.remote.DatabaseControllerRemote")
     DatabaseController databaseController;
@@ -34,6 +35,11 @@ public class Auth {
 
     public Employee getEmployee() {
         return employee;
+    }
+
+    public List<UISpot> getParkingStatus() {
+        parkingStatus = databaseController.getParkingStatus(employee);
+        return parkingStatus;
     }
 
     public String getEmployeeName(){

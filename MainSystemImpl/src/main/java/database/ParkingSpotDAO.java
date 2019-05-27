@@ -31,6 +31,17 @@ public class ParkingSpotDAO {
         }
     }
 
+    public static List<ParkingSpot> getAll() {
+        List<ParkingSpot> spots = new LinkedList<ParkingSpot>();
+        try {
+            TypedQuery<ParkingSpot> q = em.createQuery("SELECT s FROM parking_spot s", ParkingSpot.class);
+            spots = q.getResultList();
+        } catch (Exception e) {
+            System.err.println("Error when trying to retrieve data from database: " + e);
+        }
+        return spots;
+    }
+
     public static ParkingSpot getById(int id) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<ParkingSpot> query = cb.createQuery(ParkingSpot.class);

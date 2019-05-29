@@ -4,19 +4,21 @@ import database.EmployeeDAO;
 import database.ParkingSpotDAO;
 import entities.Employee;
 import entities.UISpot;
+import msg.MDBSender;
 import service.local.DatabaseControllerLocal;
 import service.remote.DatabaseControllerRemote;
 import utils.ParkingSpotsToUIConverter;
 
-import javax.ejb.Local;
-import javax.ejb.Remote;
-import javax.ejb.Stateless;
+import javax.ejb.*;
 import java.util.List;
 
 @Local(DatabaseControllerLocal.class)
 @Remote(DatabaseControllerRemote.class)
-@Stateless
+@Singleton
 public class DatabaseControllerBean implements DatabaseControllerLocal, DatabaseControllerRemote {
+
+    @EJB
+    MDBSender mdbSender;
 
     public Employee getEmployeeByName(String name) {
         return EmployeeDAO.getByName(name);
@@ -30,5 +32,11 @@ public class DatabaseControllerBean implements DatabaseControllerLocal, Database
         }else {
             return ParkingSpotsToUIConverter.convertSpotsToUI(ParkingSpotDAO.getSpotsByEmployeeId(employee.getId()));
         }
+    }
+
+    public void testSender(){
+        System.out.println("Controller");
+        mdbSender.sendMessage("Teścik kolejek");
+        System.out.println("/Controller");
     }
 }

@@ -33,6 +33,12 @@ public class Auth {
         }
     }
 
+    public void testSender(){
+        System.out.println("Click");
+        databaseController.testSender();
+        System.out.println("/Click");
+    }
+
     public Employee getEmployee() {
         return employee;
     }

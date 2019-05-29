@@ -12,6 +12,7 @@
         <module>ParkingMeter</module>
         <module>ParkingSensor</module>
         <module>ManagementApp</module>
+        <module>ManagmentWebApp</module>
     </modules>
 
     <groupId>Parking_Meter</groupId>

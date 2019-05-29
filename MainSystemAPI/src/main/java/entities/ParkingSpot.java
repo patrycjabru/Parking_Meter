@@ -2,13 +2,14 @@ package entities;
 import org.hibernate.dialect.Database;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity(name = "parking_spot")
-public class ParkingSpot {
+public class ParkingSpot implements Serializable {
 
     @Id
     @GeneratedValue

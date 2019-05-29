@@ -1,5 +1,6 @@
 package database;
 
+import entities.Employee;
 import entities.ParkingSpot;
 import entities.Zone;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -105,5 +106,55 @@ public class ParkingSpotDAO {
             em.getTransaction().rollback();
             System.err.println("Error when trying to update data in database: " + e);
         }
+    }
+
+
+    public static List<ParkingSpot> getSpotsByEmployeeId(int employeeId) {
+        Employee employee = EmployeeDAO.getById(employeeId);
+        Zone zone = employee.getZone();
+
+        List<ParkingSpot> spots = new LinkedList<ParkingSpot>();
+        try {
+            TypedQuery<ParkingSpot> q = em
+                    .createQuery("SELECT p FROM parking_spot p WHERE p.zone = :zone",ParkingSpot.class)
+                    .setParameter("zone", zone);
+            spots = q.getResultList();
+        }
+        catch (Exception e) {
+            System.err.println("Error when trying to retrieve data from database: " + e);
+        }
+        return spots;
+
+
+//        CriteriaBuilder cb = em.getCriteriaBuilder();
+//        CriteriaQuery<ParkingSpot> query = cb.createQuery(ParkingSpot.class);
+//        Root<ParkingSpot> hh = query.from(ParkingSpot.class);
+//        List<Predicate> predicates = new LinkedList<Predicate>();
+//
+//        predicates.add(cb.equal(hh.get("zone"), zone));
+//
+//        query.where(predicates.toArray(new Predicate[] {}));
+//
+//        List<ParkingSpot> spots = new LinkedList<ParkingSpot>();
+//        try {
+//            TypedQuery<ParkingSpot> q = em.createQuery(query);
+//            spots = q.getResultList();
+//        }
+//        catch (Exception e) {
+//            System.err.println("Error when trying to retrieve data from database: " + e);
+//        }
+//        return spots;
+    }
+
+    public static List<ParkingSpot> getAllSpots(){
+        List<ParkingSpot> spots = new LinkedList<ParkingSpot>();
+        try {
+            TypedQuery<ParkingSpot> q = em.createQuery("SELECT p FROM parking_spot p",ParkingSpot.class);
+            spots = q.getResultList();
+        }
+        catch (Exception e) {
+            System.err.println("Error when trying to retrieve data from database: " + e);
+        }
+        return spots;
     }
 }

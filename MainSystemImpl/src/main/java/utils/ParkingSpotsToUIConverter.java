@@ -15,7 +15,7 @@ public class ParkingSpotsToUIConverter {
         for (ParkingSpot s:spots) {
             UISpot uiSpot = new UISpot();
             uiSpot.setId(s.getId());
-            uiSpot.setZoneId(s.getId());
+            uiSpot.setZoneId(s.getZone().getId());
             uiSpot.setFree(s.getFree());
             boolean isPaid = checkIfPaid(s);
             uiSpot.setPaid(isPaid);

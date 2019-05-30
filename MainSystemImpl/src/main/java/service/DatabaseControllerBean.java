@@ -7,6 +7,7 @@ import entities.UISpot;
 import msg.MDBSender;
 import service.local.DatabaseControllerLocal;
 import service.remote.DatabaseControllerRemote;
+import utils.Hash;
 import utils.ParkingSpotsToUIConverter;
 
 import javax.ejb.*;
@@ -32,6 +33,12 @@ public class DatabaseControllerBean implements DatabaseControllerLocal, Database
         }else {
             return ParkingSpotsToUIConverter.convertSpotsToUI(ParkingSpotDAO.getSpotsByEmployeeId(employee.getId()));
         }
+    }
+
+    public void changePassword(int employeeId, String oldPassword, String newPassword){
+        String hashedOldPassword = Hash.hashMD5(oldPassword);
+        String hashedNewPassword = Hash.hashMD5(newPassword);
+        EmployeeDAO.updatePassword(employeeId, hashedOldPassword, hashedNewPassword);
     }
 
     public void testSender(){

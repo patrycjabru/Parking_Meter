@@ -51,6 +51,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.picketbox/picketbox -->
+        <dependency>
+            <groupId>org.picketbox</groupId>
+            <artifactId>picketbox</artifactId>
+            <version>5.1.0.Final</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>

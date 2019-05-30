@@ -9,5 +9,6 @@ public interface DatabaseController {
 
     Employee getEmployeeByName(String name);
     List<UISpot> getParkingStatus(Employee employee);
+    void changePassword(int employeeId, String oldPassword, String newPassword);
     void testSender();
 }

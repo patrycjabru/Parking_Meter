@@ -11,6 +11,7 @@ public class DatabaseOperationHelper {
     public static void add (Object obj, EntityManager em) {
         try {
             em.getTransaction().begin();
+            //TODO nie zapomnieć o hashowaniu haseł
             em.persist(obj);
             em.getTransaction().commit();
             System.out.println("Added to database" + obj);

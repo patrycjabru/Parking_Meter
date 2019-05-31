@@ -15,14 +15,14 @@ import java.util.List;
 @Stateless
 public class MessageStorageBean implements MessageStorageLocal, MessageStorageRemote {
 
-    private List<String> messages = new ArrayList<>();
+    private List<String> messages = new ArrayList<String>();
 
     public void addMessage(String msg){
         messages.add(msg);
     }
 
     public List<String> getMessages() {
-        List<String> res = new ArrayList<>(messages);
+        List<String> res = new ArrayList<String>(messages);
         messages.clear();
         return res;
     }

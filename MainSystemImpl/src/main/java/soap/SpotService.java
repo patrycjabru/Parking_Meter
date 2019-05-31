@@ -1,6 +1,7 @@
 package soap;
 
 import database.ParkingSpotDAO;
+import events.EventDetectionManager;
 
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;
@@ -13,6 +14,7 @@ public class SpotService{
     @WebMethod(operationName = "updateSpotOccupied")
     public void updateSpotOccupied(int spot_id) {
         ParkingSpotDAO.setSpotAsOccupied(spot_id);
+        EventDetectionManager.scheduleSpotCheck(spot_id);
     }
 
     @WebMethod(operationName = "updateSpotFree")

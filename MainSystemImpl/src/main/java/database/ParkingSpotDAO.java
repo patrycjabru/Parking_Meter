@@ -2,6 +2,7 @@ package database;
 
 import entities.Employee;
 import entities.ParkingSpot;
+import entities.Ticket;
 import entities.Zone;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -124,26 +125,6 @@ public class ParkingSpotDAO {
             System.err.println("Error when trying to retrieve data from database: " + e);
         }
         return spots;
-
-
-//        CriteriaBuilder cb = em.getCriteriaBuilder();
-//        CriteriaQuery<ParkingSpot> query = cb.createQuery(ParkingSpot.class);
-//        Root<ParkingSpot> hh = query.from(ParkingSpot.class);
-//        List<Predicate> predicates = new LinkedList<Predicate>();
-//
-//        predicates.add(cb.equal(hh.get("zone"), zone));
-//
-//        query.where(predicates.toArray(new Predicate[] {}));
-//
-//        List<ParkingSpot> spots = new LinkedList<ParkingSpot>();
-//        try {
-//            TypedQuery<ParkingSpot> q = em.createQuery(query);
-//            spots = q.getResultList();
-//        }
-//        catch (Exception e) {
-//            System.err.println("Error when trying to retrieve data from database: " + e);
-//        }
-//        return spots;
     }
 
     public static List<ParkingSpot> getAllSpots(){
@@ -156,6 +137,17 @@ public class ParkingSpotDAO {
             System.err.println("Error when trying to retrieve data from database: " + e);
         }
         return spots;
+    }
+
+    public static boolean checkIfPaid(ParkingSpot spot) {
+        List<Ticket> tickets = spot.getTickets();
+        Date now = new Date();
+        for (Ticket t : tickets) {
+            System.out.println(t.getEndTime() + " : " + now);
+            if (t.getEndTime().after(now))
+                return true;
+        }
+        return false;
     }
 
     public static Double getPercentOfEmptySpots(){

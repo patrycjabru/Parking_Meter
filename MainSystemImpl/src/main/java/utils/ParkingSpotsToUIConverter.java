@@ -1,11 +1,9 @@
 package utils;
 
+import database.ParkingSpotDAO;
 import entities.ParkingSpot;
-import entities.Ticket;
 import entities.UISpot;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,21 +15,11 @@ public class ParkingSpotsToUIConverter {
             uiSpot.setId(s.getId());
             uiSpot.setZoneId(s.getZone().getId());
             uiSpot.setFree(s.getFree());
-            boolean isPaid = checkIfPaid(s);
+            boolean isPaid = ParkingSpotDAO.checkIfPaid(s);
             uiSpot.setPaid(isPaid);
             uiSpots.add(uiSpot);
         }
         return uiSpots;
     }
 
-    private static boolean checkIfPaid(ParkingSpot spot) {
-        List<Ticket> tickets = spot.getTickets();
-        Date now = new Date();
-        for (Ticket t:tickets) {
-            System.out.println(t.getEndTime() +" : "+ now);
-            if (t.getEndTime().after(now))
-                return true;
-        }
-        return false;
-    }
 }

@@ -4,6 +4,7 @@ import database.ParkingSpotDAO;
 import database.TicketDAO;
 import entities.ParkingSpot;
 import entities.Ticket;
+import events.EventDetectionManager;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -42,8 +43,7 @@ public class TicketService {
         String durationInHoursStr = durationInHoursObj.toString();
 
         int spotId = Integer.parseInt(spotIdStr);
-        int durationInHours = Integer.parseInt(durationInHoursStr)
-                ;
+        int durationInHours = Integer.parseInt(durationInHoursStr);
         Ticket ticket = new Ticket();
 
         ParkingSpot spot = ParkingSpotDAO.getById(spotId);
@@ -62,6 +62,8 @@ public class TicketService {
 
         ticket.setEndTime(tsEnd);
         TicketDAO.add(ticket);
+
+        EventDetectionManager.scheduleTicketCheck(ticket);
         return Response.status(200).build();
     }
 }

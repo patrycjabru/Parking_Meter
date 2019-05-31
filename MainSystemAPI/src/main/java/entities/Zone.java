@@ -17,7 +17,7 @@ public class Zone implements Serializable {
     private List<ParkingSpot> parkingSpots = new ArrayList<ParkingSpot>();
 
     @OneToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(nullable = true, name = "employee_id")
     private Employee employee;
 
     public Zone() {

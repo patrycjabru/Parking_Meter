@@ -102,7 +102,7 @@ public class EmployeeDAO {
                 foundEmployee.setPassword(hashedNewPassword);
                 em.getTransaction().commit();
             }else{
-                //TODO coś trzeba wymyślić, jak przekazać info o złym haśle
+                //TODO coś trzeba wymyślić, jak przekazać info o złym haśle i ten merge/update sprawdzic
                 System.out.println("Złe hasło");
             }
         }
@@ -110,5 +110,16 @@ public class EmployeeDAO {
             em.getTransaction().rollback();
             System.err.println("Error when trying to update data in database: " + e);
         }
+    }
+
+    public static List<Employee> getAllEmployees() {
+        List<Employee> result = null;
+        try{
+            TypedQuery<Employee> q = em.createQuery("SELECT e FROM employee e", Employee.class);
+            result = q.getResultList();
+        }catch (Exception e){
+            System.err.println("Error when trying to update data in database: " + e);
+        }
+        return result;
     }
 }

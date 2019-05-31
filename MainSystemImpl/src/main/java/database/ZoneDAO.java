@@ -22,6 +22,10 @@ public class ZoneDAO {
         DatabaseOperationHelper.add(o, em);
     }
 
+    public static void update(Object o){
+        DatabaseOperationHelper.update(o, em);
+    }
+
     public static Zone getById(int id) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Zone> query = cb.createQuery(Zone.class);
@@ -54,5 +58,18 @@ public class ZoneDAO {
             System.err.println("Error when trying to deleteById data from database: " + e);
             em.getTransaction().rollback();
         }
+    }
+
+    public static List<Zone> getWithoutEmployeeID() {
+        List<Zone> result = null;
+        try {
+            TypedQuery<Zone> q = em.createQuery("SELECT z FROM zone z WHERE z.employee = NULL", Zone.class);
+            result = q.getResultList();
+        }
+        catch (Exception e) {
+            System.err.println("Error when trying to deleteById data from database: " + e);
+            em.getTransaction().rollback();
+        }
+        return result;
     }
 }

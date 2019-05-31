@@ -11,7 +11,6 @@ public class DatabaseOperationHelper {
     public static void add (Object obj, EntityManager em) {
         try {
             em.getTransaction().begin();
-            //TODO nie zapomnieć o hashowaniu haseł
             em.persist(obj);
             em.getTransaction().commit();
             System.out.println("Added to database" + obj);
@@ -19,6 +18,17 @@ public class DatabaseOperationHelper {
         catch(Exception e) {
             em.getTransaction().rollback();
             System.err.println("Error when trying to add data to database: " + e);
+        }
+    }
+
+    public static void update (Object obj, EntityManager em){
+        try{
+            em.getTransaction().begin();
+            em.merge(obj);
+            em.getTransaction().commit();
+        }catch (Exception e){
+            em.getTransaction().rollback();
+            System.err.println("Error when trying to update data to database: " + e);
         }
     }
 

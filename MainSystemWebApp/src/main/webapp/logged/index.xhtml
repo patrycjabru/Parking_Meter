@@ -4,14 +4,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
-    <title>Title</title>
-</head>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head/>
 <body>
     <h1>Jesteś zalogowany #{auth.getEmployeeName()} </h1>
 
-    <h:form>
+    <h:form id="panel">
         <h:dataTable value="#{auth.parkingStatus}" var="status" styleClass="order-table"
                      headerClass="order-table-header"
                      rowClasses="order-table-odd-row,order-table-even-row" style="border-spacing: 8px">
@@ -32,6 +31,7 @@
                 #{status.paid}
             </h:column>
         </h:dataTable>
+        <p:poll interval="3" listener="#{auth.getParkingStatus()}" process="@this" update="panel" />
     </h:form>
 
     <h:form>

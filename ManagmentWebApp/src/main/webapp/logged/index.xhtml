@@ -6,6 +6,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
+    <h1>Jesteś zalogowany #{notificationView.getEmployeeName()} </h1>
+
     <h:form>
         <h:dataTable value="#{notificationView.messages}" var="msg" styleClass="order-table"
                      headerClass="order-table-header"

@@ -5,5 +5,5 @@ import java.util.List;
 public interface MessageStorage {
 
     void addMessage(String msg);
-    List<String> getMessages();
+    List<String> getMessages(int employeeID);
 }

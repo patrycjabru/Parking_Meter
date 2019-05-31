@@ -21,6 +21,17 @@ public class DatabaseOperationHelper {
         }
     }
 
+    public static void update (Object obj, EntityManager em){
+        try{
+            em.getTransaction().begin();
+            em.merge(obj);
+            em.getTransaction().commit();
+        }catch (Exception e){
+            em.getTransaction().rollback();
+            System.err.println("Error when trying to update data to database: " + e);
+        }
+    }
+
     public static void delete (Object obj, EntityManager em) {
         em.getTransaction().begin();
         em.remove(obj);

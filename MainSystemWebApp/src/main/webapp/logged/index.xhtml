@@ -35,7 +35,12 @@
     </h:form>
 
     <h:form>
-    <h:commandButton value="Test sendera" type="submit" action="#{auth.testSender()}" />
+        <h:commandButton value="Test sendera" type="submit" action="#{auth.testSender()}" />
+    </h:form>
+
+
+    <h:form >
+        <h:commandButton value="Panel admina" type="submit" rendered="#{auth.employee.isAdmin}" action="/logged/add.xhtml" />
     </h:form>
 </body>
 

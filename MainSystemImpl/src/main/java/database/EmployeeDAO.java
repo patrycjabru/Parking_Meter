@@ -93,4 +93,33 @@ public class EmployeeDAO {
             System.err.println("Error when trying to update data in database: " + e);
         }
     }
+
+    public static void updatePassword(int employeeId, String hashedOldPassword, String hashedNewPassword) {
+        try{
+            Employee foundEmployee = em.find(Employee.class, employeeId);
+            if(foundEmployee.getPassword().equals(hashedOldPassword)){
+                em.getTransaction().begin();
+                foundEmployee.setPassword(hashedNewPassword);
+                em.getTransaction().commit();
+            }else{
+                //TODO coś trzeba wymyślić, jak przekazać info o złym haśle i ten merge/update sprawdzic
+                System.out.println("Złe hasło");
+            }
+        }
+        catch(Exception e) {
+            em.getTransaction().rollback();
+            System.err.println("Error when trying to update data in database: " + e);
+        }
+    }
+
+    public static List<Employee> getAllEmployees() {
+        List<Employee> result = null;
+        try{
+            TypedQuery<Employee> q = em.createQuery("SELECT e FROM employee e", Employee.class);
+            result = q.getResultList();
+        }catch (Exception e){
+            System.err.println("Error when trying to update data in database: " + e);
+        }
+        return result;
+    }
 }

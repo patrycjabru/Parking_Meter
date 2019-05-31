@@ -142,11 +142,39 @@ public class ParkingSpotDAO {
     public static boolean checkIfPaid(ParkingSpot spot) {
         List<Ticket> tickets = spot.getTickets();
         Date now = new Date();
-        for (Ticket t:tickets) {
-            System.out.println(t.getEndTime() +" : "+ now);
+        for (Ticket t : tickets) {
+            System.out.println(t.getEndTime() + " : " + now);
             if (t.getEndTime().after(now))
                 return true;
         }
         return false;
+    }
+
+    public static Double getPercentOfEmptySpots(){
+        Double res = 0.0;
+        try {
+            TypedQuery<Double> q = em.createQuery("SELECT COUNT(p) FROM parking_spot p", Double.class);
+            Double all = q.getSingleResult();
+            q = em.createQuery("SELECT COUNT(p) FROM parking_spot p WHERE p.isFree = true",Double.class);
+            res = q.getSingleResult();
+            res = res/all;
+        } catch (Exception e) {
+            System.err.println("Error when trying to retrieve data from database: " + e);
+        }
+        return res;
+    }
+
+    public static Double getPercentOfEmptySpotsForZone(Zone zone) {
+        Double res = 0.0;
+        try {
+            TypedQuery<Double> q = em.createQuery("SELECT COUNT(p) FROM parking_spot p WHERE zone = :zone", Double.class).setParameter("zone", zone);
+            Double all = q.getSingleResult();
+            q = em.createQuery("SELECT COUNT(p) FROM parking_spot p WHERE p.isFree = true AND zone = :zone",Double.class).setParameter("zone", zone);
+            res = q.getSingleResult();
+            res = res/all;
+        } catch (Exception e) {
+            System.err.println("Error when trying to retrieve data from database: " + e);
+        }
+        return res;
     }
 }

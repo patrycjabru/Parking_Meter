@@ -6,7 +6,8 @@ import entities.UISpot;
 import java.util.List;
 
 public interface DatabaseController {
-    Employee getEmployeeByName(String name);
 
+    Employee getEmployeeByName(String name);
     List<UISpot> getParkingStatus(Employee employee);
+    void testSender();
 }

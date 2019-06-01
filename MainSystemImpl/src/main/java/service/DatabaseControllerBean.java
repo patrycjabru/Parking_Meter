@@ -17,8 +17,8 @@ import java.util.List;
 @Singleton
 public class DatabaseControllerBean implements DatabaseControllerLocal, DatabaseControllerRemote {
 
-    @EJB
-    MDBSender mdbSender;
+    //@EJB
+    //MDBSender mdbSender;
 
     public Employee getEmployeeByName(String name) {
         return EmployeeDAO.getByName(name);
@@ -36,7 +36,7 @@ public class DatabaseControllerBean implements DatabaseControllerLocal, Database
 
     public void testSender(){
         System.out.println("Controller");
-        mdbSender.sendMessage("Teścik kolejek");
+        //mdbSender.sendMessage("Teścik kolejek");
         System.out.println("/Controller");
     }
 }

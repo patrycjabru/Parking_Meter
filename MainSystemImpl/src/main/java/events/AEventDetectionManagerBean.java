@@ -6,7 +6,12 @@ import msg.MDBSender;
 import service.local.EventDetectionManagerLocal;
 import service.remote.EventDetectionManagerRemote;
 
+import javax.annotation.Resource;
 import javax.ejb.*;
+import javax.inject.Inject;
+import javax.jms.JMSContext;
+import javax.jms.Queue;
+import javax.jms.TextMessage;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -15,16 +20,17 @@ import java.util.Timer;
 @Local(EventDetectionManagerLocal.class)
 @Remote(EventDetectionManagerRemote.class)
 @Singleton
-public class EventDetectionManagerImpl implements EventDetectionManagerLocal, EventDetectionManagerRemote {
+public class AEventDetectionManagerBean implements EventDetectionManagerLocal, EventDetectionManagerRemote {
+
     @EJB
     MDBSender mdbSender;
 
-    public static void scheduleTicketCheck(Ticket ticket) {
+    public void scheduleTicketCheck(Ticket ticket) {
         Timer timer = new Timer();
-        timer.schedule(new CheckValidTicketForSpotTimerTask(ticket.getParkingSpot().getId()), ticket.getEndTime());
+        timer.schedule(new CheckValidTicketForSpotTimerTask(ticket.getParkingSpot().getId(),this), ticket.getEndTime());
     }
 
-    public static void scheduleSpotCheck(int spotId)  {
+    public void scheduleSpotCheck(int spotId)  {
         Timer timer = new Timer();
 
 //        long ONE_MINUTE_IN_MILLIS=60000; //TODO uncomment
@@ -33,7 +39,7 @@ public class EventDetectionManagerImpl implements EventDetectionManagerLocal, Ev
         long timeInMillis = date.getTimeInMillis();
         Date afterAddingFiveMins = new Date(timeInMillis + (5 * ONE_MINUTE_IN_MILLIS));
 
-        timer.schedule(new CheckIfSpotIsFreeTimerTask(spotId), afterAddingFiveMins);
+        timer.schedule(new CheckIfSpotIsFreeTimerTask(spotId, this), afterAddingFiveMins);
     }
 
     public void alert(ParkingSpot spot) {
@@ -42,7 +48,7 @@ public class EventDetectionManagerImpl implements EventDetectionManagerLocal, Ev
         mdbSender.sendMessage(employeeId+":"+spot.getId());
     }
 
-    public static boolean isAlertValid(ParkingSpot spot) {
+    public boolean isAlertValid(ParkingSpot spot) {
         return true;//TODO remove this line
 
 

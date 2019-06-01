@@ -4,11 +4,13 @@ import database.ParkingSpotDAO;
 import database.TicketDAO;
 import entities.ParkingSpot;
 import entities.Ticket;
-import events.EventDetectionManagerImpl;
+import events.AEventDetectionManagerBean;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import service.EventDetectionManager;
 
+import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -19,6 +21,9 @@ import java.util.Date;
 
 @Path("/tickets")
 public class TicketService {
+
+    @EJB(lookup = "java:global/MainSystemImpl-1.0/AEventDetectionManagerBean!service.local.EventDetectionManagerLocal")
+    EventDetectionManager eventDetectionManager;
 
     @POST
     @Consumes("application/json")
@@ -63,7 +68,7 @@ public class TicketService {
         ticket.setEndTime(tsEnd);
         TicketDAO.add(ticket);
 
-        EventDetectionManagerImpl.scheduleTicketCheck(ticket);
+        eventDetectionManager.scheduleTicketCheck(ticket);
         return Response.status(200).build();
     }
 }

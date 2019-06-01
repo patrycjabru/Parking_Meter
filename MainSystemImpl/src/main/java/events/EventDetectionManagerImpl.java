@@ -1,18 +1,23 @@
-package nevents;
+package events;
 
-import database.ParkingSpotDAO;
 import entities.ParkingSpot;
 import entities.Ticket;
 import msg.MDBSender;
+import service.local.EventDetectionManagerLocal;
+import service.remote.EventDetectionManagerRemote;
 
-import javax.ejb.EJB;
+import javax.ejb.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 
-public class EventDetectionManager {
+
+@Local(EventDetectionManagerLocal.class)
+@Remote(EventDetectionManagerRemote.class)
+@Singleton
+public class EventDetectionManagerImpl implements EventDetectionManagerLocal, EventDetectionManagerRemote {
     @EJB
-    MDBSender sender;
+    MDBSender mdbSender;
 
     public static void scheduleTicketCheck(Ticket ticket) {
         Timer timer = new Timer();
@@ -34,7 +39,7 @@ public class EventDetectionManager {
     public void alert(ParkingSpot spot) {
         System.out.println("Detected unpaid parking spot!");
         int employeeId = spot.getZone().getEmployee().getId();
-        sender.sendMessage(employeeId+":"+spot.getId());
+        mdbSender.sendMessage(employeeId+":"+spot.getId());
     }
 
     public static boolean isAlertValid(ParkingSpot spot) {

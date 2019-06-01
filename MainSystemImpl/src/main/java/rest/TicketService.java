@@ -4,7 +4,7 @@ import database.ParkingSpotDAO;
 import database.TicketDAO;
 import entities.ParkingSpot;
 import entities.Ticket;
-import nevents.EventDetectionManager;
+import events.EventDetectionManagerImpl;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -63,7 +63,7 @@ public class TicketService {
         ticket.setEndTime(tsEnd);
         TicketDAO.add(ticket);
 
-        EventDetectionManager.scheduleTicketCheck(ticket);
+        EventDetectionManagerImpl.scheduleTicketCheck(ticket);
         return Response.status(200).build();
     }
 }

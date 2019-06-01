@@ -2,7 +2,7 @@ package rest;
 
 import database.ParkingSpotDAO;
 import entities.ParkingSpot;
-import nevents.EventDetectionManager;
+import events.EventDetectionManagerImpl;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -19,7 +19,7 @@ public class AlertService {
         ParkingSpot spot = ParkingSpotDAO.getById(spotId);
         if (spot == null)
             return Response.status(404).entity("Parking spot with id " + spotId + " has not been found").build();
-        boolean isValid = EventDetectionManager.isAlertValid(spot);
+        boolean isValid = EventDetectionManagerImpl.isAlertValid(spot);
         return Response.status(200).entity(isValid).build();
     }
 }

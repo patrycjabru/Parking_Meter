@@ -1,4 +1,4 @@
-package nevents;
+package events;
 
 import database.ParkingSpotDAO;
 import entities.ParkingSpot;
@@ -15,8 +15,8 @@ public class CheckIfSpotIsFreeTimerTask extends TimerTask {
     public void run() {
         System.out.println("Checking parking spot...");
         ParkingSpot spot = ParkingSpotDAO.getById(spotId);
-        if (EventDetectionManager.isAlertValid(spot)) {
-            EventDetectionManager manager = new EventDetectionManager();
+        if (EventDetectionManagerImpl.isAlertValid(spot)) {
+            EventDetectionManagerImpl manager = new EventDetectionManagerImpl();
             manager.alert(spot);
         }
     }

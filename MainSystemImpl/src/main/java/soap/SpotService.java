@@ -1,7 +1,7 @@
 package soap;
 
 import database.ParkingSpotDAO;
-import events.EventDetectionManager;
+import nevents.EventDetectionManager;
 
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;

@@ -1,17 +1,14 @@
-package events;
+package nevents;
 
 import database.ParkingSpotDAO;
 import entities.ParkingSpot;
-import msg.MDBSender;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.TimerTask;
 
-public class CheckValidTicketForSpotTimerTask extends TimerTask {
-    int spotId;
+public class CheckIfSpotIsFreeTimerTask extends TimerTask {
+    private int spotId;
 
-    public CheckValidTicketForSpotTimerTask(int spotId) {
+    public CheckIfSpotIsFreeTimerTask(int spotId) {
         this.spotId = spotId;
     }
 
@@ -19,7 +16,8 @@ public class CheckValidTicketForSpotTimerTask extends TimerTask {
         System.out.println("Checking parking spot...");
         ParkingSpot spot = ParkingSpotDAO.getById(spotId);
         if (EventDetectionManager.isAlertValid(spot)) {
-            EventDetectionManager.alert(spot);
+            EventDetectionManager manager = new EventDetectionManager();
+            manager.alert(spot);
         }
     }
 }

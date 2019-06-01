@@ -4,7 +4,7 @@ import database.ParkingSpotDAO;
 import database.TicketDAO;
 import entities.ParkingSpot;
 import entities.Ticket;
-import events.EventDetectionManager;
+import nevents.EventDetectionManager;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

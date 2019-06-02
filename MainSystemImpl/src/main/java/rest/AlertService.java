@@ -15,9 +15,6 @@ import javax.ws.rs.core.Response;
 @Path("/alerts")
 public class AlertService {
 
-    @EJB(lookup = "java:global/MainSystemImpl-1.0/AEventDetectionManagerBean!service.local.EventDetectionManagerLocal")
-    EventDetectionManager eventDetectionManager;
-
     @GET
     @Produces("application/json")
     @Path("/{spot}")
@@ -25,7 +22,7 @@ public class AlertService {
         ParkingSpot spot = ParkingSpotDAO.getById(spotId);
         if (spot == null)
             return Response.status(404).entity("Parking spot with id " + spotId + " has not been found").build();
-        boolean isValid = eventDetectionManager.isAlertValid(spot);
+        boolean isValid = new AEventDetectionManagerBean().isAlertValid(spot);
         return Response.status(200).entity(isValid).build();
     }
 }

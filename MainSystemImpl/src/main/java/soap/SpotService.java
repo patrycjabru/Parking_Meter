@@ -1,8 +1,9 @@
 package soap;
 
 import database.ParkingSpotDAO;
-import events.EventDetectionManager;
+import service.AlertManager;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -11,10 +12,13 @@ import javax.jws.WebService;
 @WebService
 public class SpotService{
 
+    @EJB(lookup = "java:global/MainSystemImpl-1.0/AlertManagerBean!service.local.AlertManagerLocal")
+    AlertManager alertManager;
+
     @WebMethod(operationName = "updateSpotOccupied")
     public void updateSpotOccupied(int spot_id) {
         ParkingSpotDAO.setSpotAsOccupied(spot_id);
-        EventDetectionManager.scheduleSpotCheck(spot_id);
+        alertManager.scheduleSpotCheck(spot_id);
     }
 
     @WebMethod(operationName = "updateSpotFree")

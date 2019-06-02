@@ -27,7 +27,8 @@ public class ParkingBean {
         OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
         writer.write(json.toString());
         writer.close();
-        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        InputStream inputStream = con.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         StringBuffer jsonString = new StringBuffer();
         String line;
         while ((line = br.readLine()) != null) {

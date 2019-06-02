@@ -4,7 +4,7 @@ import database.ParkingSpotDAO;
 import database.TicketDAO;
 import entities.ParkingSpot;
 import entities.Ticket;
-import events.EventDetectionManager;
+import events.AlertManagerBean;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -19,7 +19,6 @@ import java.util.Date;
 
 @Path("/tickets")
 public class TicketService {
-
     @POST
     @Consumes("application/json")
     @Path("/")
@@ -63,7 +62,7 @@ public class TicketService {
         ticket.setEndTime(tsEnd);
         TicketDAO.add(ticket);
 
-        EventDetectionManager.scheduleTicketCheck(ticket);
+        new AlertManagerBean().scheduleTicketCheck(ticket);
         return Response.status(200).build();
     }
 }

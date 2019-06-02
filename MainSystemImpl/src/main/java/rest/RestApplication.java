@@ -11,6 +11,7 @@ public class RestApplication extends Application{
     public RestApplication() {
         singletons.add(new TicketService());
         singletons.add(new SpotService());
+        singletons.add(new AlertService());
     }
     @Override
     public Set<Object> getSingletons() {

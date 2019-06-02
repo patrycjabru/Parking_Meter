@@ -21,10 +21,6 @@ import java.util.Date;
 
 @Path("/tickets")
 public class TicketService {
-
-    @EJB(lookup = "java:global/MainSystemImpl-1.0/AEventDetectionManagerBean!service.local.EventDetectionManagerLocal")
-    EventDetectionManager eventDetectionManager;
-
     @POST
     @Consumes("application/json")
     @Path("/")
@@ -68,7 +64,7 @@ public class TicketService {
         ticket.setEndTime(tsEnd);
         TicketDAO.add(ticket);
 
-        eventDetectionManager.scheduleTicketCheck(ticket);
+        new AEventDetectionManagerBean().scheduleTicketCheck(ticket);
         return Response.status(200).build();
     }
 }

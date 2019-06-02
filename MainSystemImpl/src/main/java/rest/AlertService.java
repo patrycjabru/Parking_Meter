@@ -2,10 +2,9 @@ package rest;
 
 import database.ParkingSpotDAO;
 import entities.ParkingSpot;
-import events.AEventDetectionManagerBean;
-import service.EventDetectionManager;
+import events.AlertManagerBean;
+import events.ValidateNotification;
 
-import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -22,7 +21,7 @@ public class AlertService {
         ParkingSpot spot = ParkingSpotDAO.getById(spotId);
         if (spot == null)
             return Response.status(404).entity("Parking spot with id " + spotId + " has not been found").build();
-        boolean isValid = new AEventDetectionManagerBean().isAlertValid(spot);
+        boolean isValid = ValidateNotification.isAlertValid(spot);
         return Response.status(200).entity(isValid).build();
     }
 }

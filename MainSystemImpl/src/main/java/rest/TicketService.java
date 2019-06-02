@@ -4,13 +4,11 @@ import database.ParkingSpotDAO;
 import database.TicketDAO;
 import entities.ParkingSpot;
 import entities.Ticket;
-import events.AEventDetectionManagerBean;
+import events.AlertManagerBean;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import service.EventDetectionManager;
 
-import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -64,7 +62,7 @@ public class TicketService {
         ticket.setEndTime(tsEnd);
         TicketDAO.add(ticket);
 
-        new AEventDetectionManagerBean().scheduleTicketCheck(ticket);
+        new AlertManagerBean().scheduleTicketCheck(ticket);
         return Response.status(200).build();
     }
 }

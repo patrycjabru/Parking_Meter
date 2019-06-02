@@ -3,9 +3,8 @@ package service;
 import entities.ParkingSpot;
 import entities.Ticket;
 
-public interface EventDetectionManager {
+public interface AlertManager {
     void alert(ParkingSpot spot);
-    boolean isAlertValid(ParkingSpot spot);
     void scheduleSpotCheck(int spotId);
     void scheduleTicketCheck(Ticket ticket);
 }

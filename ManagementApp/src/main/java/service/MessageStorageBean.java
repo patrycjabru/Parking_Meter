@@ -9,6 +9,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Local(MessageStorageLocal.class)
 @Remote(MessageStorageRemote.class)
@@ -21,8 +22,12 @@ public class MessageStorageBean implements MessageStorageLocal, MessageStorageRe
         messages.add(msg);
     }
 
-    public List<String> getMessages() {
+    public List<String> getMessages(int employeeID) {
         List<String> res = new ArrayList<String>(messages);
+//TODO przefiltrować, te wiadomości ktorych empID == employeeID, usunąć je z messages i wysłać zapytanie o nie do REST
+//        List<String> res1 = messages.stream().filter(str -> str.contains(employeeID+":")).collect(Collectors.toList());
+//        messages.removeAll(res1);
+//        res1 -> do RESTA
         messages.clear();
         return res;
     }

@@ -20,10 +20,6 @@ import java.util.List;
 @Remote(DatabaseControllerRemote.class)
 @Singleton
 public class DatabaseControllerBean implements DatabaseControllerLocal, DatabaseControllerRemote {
-
-    //@EJB
-    //MDBSender mdbSender;
-
     public Employee getEmployeeByName(String name) {
         return EmployeeDAO.getByName(name);
     }

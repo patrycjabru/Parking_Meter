@@ -11,8 +11,8 @@
         <module>MainSystemWebApp</module>
         <module>ParkingMeter</module>
         <module>ParkingSensor</module>
-        <module>ManagementApp</module>
-        <module>ManagmentWebApp</module>
+        <module>AlertApp</module>
+        <module>AlertWebApp</module>
     </modules>
 
     <groupId>Parking_Meter</groupId>

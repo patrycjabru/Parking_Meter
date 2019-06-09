@@ -18,16 +18,14 @@ import java.util.Timer;
 public class AlertManagerBean implements AlertManagerLocal, AlertManagerRemote {
 
     @EJB
-    MDBSender mdbSender;
+    private MDBSender mdbSender;
+    private Timer timer = new Timer();
 
     public void scheduleTicketCheck(Ticket ticket) {
-        Timer timer = new Timer();
         timer.schedule(new CheckSpotForAlertsTimerTask(ticket.getParkingSpot().getId(),this), ticket.getEndTime());
     }
 
     public void scheduleSpotCheck(int spotId)  {
-        Timer timer = new Timer();
-
         long ONE_MINUTE_IN_MILLIS=60000;
         Calendar date = Calendar.getInstance();
         long timeInMillis = date.getTimeInMillis();

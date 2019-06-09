@@ -21,8 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ParkingSpotDAO {
-    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("DataSource");;
-    private static EntityManager em = factory.createEntityManager();
+    private static EntityManager em = ConnectionHelper.getFactory().createEntityManager();
 
     public static void add(Object o, int zone_id) {
         try {
@@ -143,7 +142,6 @@ public class ParkingSpotDAO {
         List<Ticket> tickets = spot.getTickets();
         Date now = new Date();
         for (Ticket t : tickets) {
-            System.out.println(t.getEndTime() + " : " + now);
             if (t.getEndTime().after(now))
                 return true;
         }

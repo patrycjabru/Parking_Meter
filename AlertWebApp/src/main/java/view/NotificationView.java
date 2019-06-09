@@ -18,7 +18,7 @@ public class NotificationView {
 
     private Employee employee;
 
-    @EJB(lookup = "java:global/ManagementApp-1.0/MessageStorageBean!service.remote.MessageStorageRemote")
+    @EJB(lookup = "java:global/AlertApp-1.0/MessageStorageBean!service.remote.MessageStorageRemote")
     MessageStorage messageStorageBean;
 
     @EJB(lookup = "java:global/MainSystemImpl-1.0/DatabaseControllerBean!service.remote.DatabaseControllerRemote")

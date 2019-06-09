@@ -29,6 +29,29 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.picketbox:picketbox:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:jboss-security-spi:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:acl-spi:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:authorization-spi:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:common-spi:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:identity-spi:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:picketbox-spi-bare:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.spec.javax.security.auth.message:jboss-jaspi-api_1.1_spec:1.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.spec.javax.servlet:jboss-servlet-api_3.1_spec:1.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:jbosssx:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:jbosssx-bare:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.security:jbossxacml:2.0.8.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.spec.javax.resource:jboss-connector-api_1.6_spec:1.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.spec.javax.security.jacc:jboss-jacc-api_1.5_spec:1.0.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:picketbox-commons:1.0.0.final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:picketbox-acl-impl:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:5.1.9.Final" level="project" />
+    <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.0.b2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:picketbox-identity-impl:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.picketbox:picketbox-bare:5.1.0.Final" level="project" />
     <orderEntry type="module" module-name="MainSystemAPI" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.hibernate:hibernate-core:5.4.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.3.2.Final" level="project" />

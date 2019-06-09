@@ -28,7 +28,8 @@ public class AlertManagerBean implements AlertManagerLocal, AlertManagerRemote {
     public void scheduleSpotCheck(int spotId)  {
         Timer timer = new Timer();
 
-        long ONE_MINUTE_IN_MILLIS=60000;
+        //TODO zmienić na 60000
+        long ONE_MINUTE_IN_MILLIS=200;
         Calendar date = Calendar.getInstance();
         long timeInMillis = date.getTimeInMillis();
         Date afterAddingFiveMins = new Date(timeInMillis + (5 * ONE_MINUTE_IN_MILLIS));

@@ -1,5 +1,6 @@
 package service;
 
+import org.apache.activemq.artemis.utils.json.JSONObject;
 import service.local.MessageStorageLocal;
 import service.remote.MessageStorageRemote;
 
@@ -7,6 +8,9 @@ import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Singleton;
 import javax.ejb.Stateless;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,14 +26,32 @@ public class MessageStorageBean implements MessageStorageLocal, MessageStorageRe
         messages.add(msg);
     }
 
-    public List<String> getMessages(int employeeID) {
-        List<String> res = new ArrayList<String>(messages);
-//TODO przefiltrować, te wiadomości ktorych empID == employeeID, usunąć je z messages i wysłać zapytanie o nie do REST
-//        List<String> res1 = messages.stream().filter(str -> str.contains(employeeID+":")).collect(Collectors.toList());
-//        messages.removeAll(res1);
-//        res1 -> do RESTA
-        messages.clear();
-        return res;
+    public List<String> getMessages(int employeeID){
+        List<String> res1 = messages.stream().filter(str -> str.contains(employeeID+":")).collect(Collectors.toList());
+        messages.removeAll(res1);
+        return res1.stream().filter(MessageStorageBean::isAlertValid).collect(Collectors.toList());
+    }
+
+    private static Boolean isAlertValid(String alert) {
+        String[] alertArray = alert.split(":");
+        StringBuffer jsonString = new StringBuffer();
+        try {
+            URL url = new URL("http://127.0.0.1:8080/MainSystemImpl-1.0" + "/alerts/" + alertArray[1]);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setDoOutput(true);
+            con.setRequestProperty("Content-Type", "application/json");
+            BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String line;
+            while ((line = br.readLine()) != null) {
+                jsonString.append(line);
+            }
+            br.close();
+            con.disconnect();
+        }catch (Exception e){
+            System.out.println("Error: "+e.getMessage());
+        }
+        return Boolean.parseBoolean(jsonString.toString());
     }
 
 }

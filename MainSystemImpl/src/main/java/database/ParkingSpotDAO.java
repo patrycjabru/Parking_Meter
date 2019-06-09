@@ -143,7 +143,6 @@ public class ParkingSpotDAO {
         List<Ticket> tickets = spot.getTickets();
         Date now = new Date();
         for (Ticket t : tickets) {
-            System.out.println(t.getEndTime() + " : " + now);
             if (t.getEndTime().after(now))
                 return true;
         }

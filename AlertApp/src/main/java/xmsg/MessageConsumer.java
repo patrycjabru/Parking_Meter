@@ -20,7 +20,7 @@ public class MessageConsumer implements MessageListener {
 
     private static final Logger LOGGER = Logger.getLogger(MessageConsumer.class.toString());
 
-    @EJB(lookup = "java:global/ManagementApp-1.0/MessageStorageBean!service.local.MessageStorageLocal")
+    @EJB(lookup = "java:global/AlertApp-1.0/MessageStorageBean!service.local.MessageStorageLocal")
     MessageStorage messageStorage;
 
     public MessageConsumer() {

@@ -11,7 +11,11 @@ import javax.ejb.Stateless;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,15 +25,31 @@ import java.util.stream.Collectors;
 public class MessageStorageBean implements MessageStorageLocal, MessageStorageRemote {
 
     private List<String> messages = new ArrayList<String>();
+    private Date lastModified = new Date();
 
     public void addMessage(String msg){
-        messages.add(msg);
+        if(msg.contains("date")){
+            String date = msg.split(":")[1];
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+            try {
+                lastModified = formatter.parse(date);
+                System.out.println(lastModified);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }else {
+            messages.add(msg);
+        }
     }
 
     public List<String> getMessages(int employeeID){
         List<String> res1 = messages.stream().filter(str -> str.contains(employeeID+":")).collect(Collectors.toList());
         messages.removeAll(res1);
         return res1.stream().filter(MessageStorageBean::isAlertValid).collect(Collectors.toList());
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModified;
     }
 
     private static Boolean isAlertValid(String alert) {

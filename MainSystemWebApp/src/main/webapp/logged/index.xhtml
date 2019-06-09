@@ -31,7 +31,7 @@
                 #{status.paid}
             </h:column>
         </h:dataTable>
-        <p:poll interval="3" listener="#{auth.getParkingStatus()}" process="@this" update="panel" />
+        <p:poll interval="3" listener="#{auth.updateDashboard()}" process="@this" update="panel" />
     </h:form>
 
     <h:form>
@@ -40,7 +40,7 @@
 
 
     <h:form >
-        <h:commandButton value="Panel admina" type="submit" rendered="#{auth.employee.isAdmin}" action="/logged/add.xhtml" />
+        <h:commandButton value="Panel edycji i zarządzania" type="submit" action="/logged/add.xhtml" />
     </h:form>
 </body>
 

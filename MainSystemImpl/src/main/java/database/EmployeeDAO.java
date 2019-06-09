@@ -93,7 +93,7 @@ public class EmployeeDAO {
         }
     }
 
-    public static void updatePassword(int employeeId, String hashedOldPassword, String hashedNewPassword) {
+    public static boolean updatePassword(int employeeId, String hashedOldPassword, String hashedNewPassword) {
         try{
             Employee foundEmployee = em.find(Employee.class, employeeId);
             if(foundEmployee.getPassword().equals(hashedOldPassword)){
@@ -103,12 +103,15 @@ public class EmployeeDAO {
             }else{
                 //TODO coś trzeba wymyślić, jak przekazać info o złym haśle i ten merge/update sprawdzic
                 System.out.println("Złe hasło");
+                return false;
             }
         }
         catch(Exception e) {
             em.getTransaction().rollback();
             System.err.println("Error when trying to update data in database: " + e);
+            return false;
         }
+        return true;
     }
 
     public static List<Employee> getAllEmployees() {

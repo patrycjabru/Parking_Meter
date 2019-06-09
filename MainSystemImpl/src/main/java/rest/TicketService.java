@@ -5,10 +5,15 @@ import database.TicketDAO;
 import entities.ParkingSpot;
 import entities.Ticket;
 import events.AlertManagerBean;
+import javafx.scene.control.Alert;
+import msg.MDBSender;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import service.AlertManager;
 
+import javax.ejb.Stateless;
+import javax.naming.InitialContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -18,7 +23,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Path("/tickets")
+@Stateless
 public class TicketService {
+
     @POST
     @Consumes("application/json")
     @Path("/")
@@ -61,8 +68,14 @@ public class TicketService {
 
         ticket.setEndTime(tsEnd);
         TicketDAO.add(ticket);
-
-        new AlertManagerBean().scheduleTicketCheck(ticket);
+        try {
+            InitialContext ctx = new InitialContext();
+            AlertManager alertManagerBean;
+            alertManagerBean = (AlertManager) ctx.lookup("java:global/MainSystemImpl-1.0/AlertManagerBean!service.remote.AlertManagerRemote");
+            alertManagerBean.scheduleTicketCheck(ticket);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         return Response.status(200).build();
     }
 }

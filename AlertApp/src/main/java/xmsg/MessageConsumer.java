@@ -26,6 +26,7 @@ public class MessageConsumer implements MessageListener {
     public MessageConsumer() {
     }
 
+    @Override
     public void onMessage(Message rcvMessage) {
         TextMessage msg = null;
         System.out.println("OnMessage");

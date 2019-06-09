@@ -16,7 +16,7 @@
         Login:
         <h:inputText id="login" value="#{edit.newUserLogin}" required="true"/>
         Hasło:
-        <h:inputText id="password" value="#{edit.newUserPassword}" required="true"/>
+        <h:inputSecret id="password" value="#{edit.newUserPassword}" required="true"/>
 
         <h:selectOneMenu value="#{edit.pickedZoneID}" >
             <f:selectItems value="#{edit.availableZones}" var="zone" itemLabel="#{zone.id}" itemValue="#{zone.id}"/>

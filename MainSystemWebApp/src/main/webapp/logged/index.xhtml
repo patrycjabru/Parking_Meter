@@ -8,26 +8,26 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head/>
 <body>
-    <h1>Jesteś zalogowany #{auth.getEmployeeName()} </h1>
+    <h1>#{msg['main.loggedIn']} #{auth.getEmployeeName()} </h1>
 
     <h:form id="panel">
         <h:dataTable value="#{auth.parkingStatus}" var="status" styleClass="order-table"
                      headerClass="order-table-header"
                      rowClasses="order-table-odd-row,order-table-even-row" style="border-spacing: 8px">
             <h:column>
-                <f:facet name="header">Strefa</f:facet>
+                <f:facet name="header">#{msg['dashboard.zone']}</f:facet>
                 #{status.zoneId}
             </h:column>
             <h:column>
-                <f:facet name="header">Miejsce</f:facet>
+                <f:facet name="header">#{msg['dashboard.spot']}</f:facet>
                 #{status.id}
             </h:column>
             <h:column>
-                <f:facet name="header">Stan</f:facet>
+                <f:facet name="header">#{msg['dashboard.available']}</f:facet>
                 #{status.free}
             </h:column>
             <h:column>
-                <f:facet name="header">Opłacony</f:facet>
+                <f:facet name="header">#{msg['dashboard.paid']}</f:facet>
                 #{status.paid}
             </h:column>
         </h:dataTable>
@@ -35,12 +35,15 @@
     </h:form>
 
     <h:form>
-        <h:commandButton value="Test sendera" type="submit" action="#{auth.testSender()}" />
+        <p:selectOneMenu value="#{language.localeCode}" onchange="submit()"
+                         valueChangeListener="#{language.countryLocaleCodeChanged}">
+            <f:selectItems value="#{language.countriesInMap}"/>
+        </p:selectOneMenu>
     </h:form>
 
 
     <h:form >
-        <h:commandButton value="Panel edycji i zarządzania" type="submit" action="/logged/add.xhtml" />
+        <h:commandButton value="#{msg['main.editPanel']}" type="submit" action="/logged/add.xhtml" />
     </h:form>
 </body>
 

@@ -4,46 +4,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-<head>
-    <title>Title</title>
-</head>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head/>
 <body>
-<h1>Menu edycji i zarządzania</h1>
+<h1>#{msg['edit.title']}</h1>
 
     <h:form>
-        Stare hasło:
+        #{msg['edit.oldPswd']}
         <h:inputSecret id="oldPswd" value="#{auth.oldPswd}" required="true"/>
-        Nowe hasło:
+        #{msg['edit.newPswd']}
         <h:inputSecret id="newPswd" value="#{auth.newPswd}" required="true"/>
-        <h:commandButton value="Zmień hasło" type="submit" action="#{auth.changePassword}"/>
+        <h:commandButton value="#{msg['edit.changePswd']}" type="submit" action="#{auth.changePassword}"/>
     </h:form>
 
     <h:form rendered="#{auth.employee.isAdmin}">
-        Login:
+        #{msg['edit.login']}
         <h:inputText id="login" value="#{edit.newUserLogin}" required="true"/>
-        Hasło:
+        #{msg['edit.pswd']}
         <h:inputSecret id="password" value="#{edit.newUserPassword}" required="true"/>
-
+        #{msg['edit.zone']}
         <h:selectOneMenu value="#{edit.pickedZoneID}" >
             <f:selectItems value="#{edit.availableZones}" var="zone" itemLabel="#{zone.id}" itemValue="#{zone.id}"/>
         </h:selectOneMenu>
 
-        <h:commandButton value="Dodaj nowego pracownika" type="submit" action="#{edit.addEmployee}"/>
+        <h:commandButton value="#{msg['edit.addNewEmp']}" type="submit" action="#{edit.addEmployee}"/>
     </h:form>
 
     <h:form rendered="#{auth.employee.isAdmin}">
+        #{msg['edit.emp']}
         <h:selectOneMenu value="#{edit.pickedEmployeeID}" required="true">
             <f:selectItems value="#{edit.employeeList}" var="employee" itemLabel="#{employee.name}" itemValue="#{employee.id}"/>
         </h:selectOneMenu>
-
+        #{msg['edit.zone']}
         <h:selectOneMenu value="#{edit.pickedZoneID}" required="true">
             <f:selectItems value="#{edit.availableZones}" var="zone" itemLabel="#{zone.id}" itemValue="#{zone.id}"/>
         </h:selectOneMenu>
 
-        <h:commandButton value="Zmień strefe" type="submit" action="#{edit.changeZone}"/>
+        <h:commandButton value="#{msg['edit.changeZone']}" type="submit" action="#{edit.changeZone}"/>
     </h:form>
 
+<h:form>
+    <p:selectOneMenu value="#{language.localeCode}" onchange="submit()"
+                     valueChangeListener="#{language.countryLocaleCodeChanged}">
+        <f:selectItems value="#{language.countriesInMap}"/>
+    </p:selectOneMenu>
+</h:form>
 </body>
 </html>

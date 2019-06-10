@@ -14,8 +14,7 @@ public class ValidateNotification {
         if (ParkingSpotDAO.checkIfPaid(spot))
             return false;
 
-        //TODO dac 60000
-        long ONE_MINUTE_IN_MILLIS = 200;
+        long ONE_MINUTE_IN_MILLIS = 60000;
         Calendar date = Calendar.getInstance();
         long timeInMillis = date.getTimeInMillis();
         Date afterSubtractingFiveMins = new Date(timeInMillis - (5 * ONE_MINUTE_IN_MILLIS-1));

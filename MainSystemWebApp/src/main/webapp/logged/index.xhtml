@@ -33,18 +33,19 @@
         </h:dataTable>
         <p:poll interval="3" listener="#{auth.updateDashboard()}" process="@this" update="panel" />
     </h:form>
+    <h:panelGrid columns="2">
+        <h:form>
+            <h:selectOneMenu value="#{language.localeCode}" onchange="submit()"
+                             valueChangeListener="#{language.countryLocaleCodeChanged}">
+                <f:selectItems value="#{language.countriesInMap}"/>
+            </h:selectOneMenu>
+        </h:form>
 
-    <h:form>
-        <p:selectOneMenu value="#{language.localeCode}" onchange="submit()"
-                         valueChangeListener="#{language.countryLocaleCodeChanged}">
-            <f:selectItems value="#{language.countriesInMap}"/>
-        </p:selectOneMenu>
-    </h:form>
 
-
-    <h:form >
-        <h:commandButton value="#{msg['main.editPanel']}" type="submit" action="/logged/add.xhtml" />
-    </h:form>
+        <h:form >
+            <h:commandButton value="#{msg['main.editPanel']}" type="submit" action="/logged/add.xhtml" />
+        </h:form>
+    </h:panelGrid>
 </body>
 
 </html>

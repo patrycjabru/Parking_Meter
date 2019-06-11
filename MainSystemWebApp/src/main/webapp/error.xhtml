@@ -24,10 +24,10 @@
     </h:panelGrid>
 </form>
 <h:form>
-    <p:selectOneMenu value="#{language.localeCode}" onchange="submit()"
+    <h:selectOneMenu value="#{language.localeCode}" onchange="submit()"
                      valueChangeListener="#{language.countryLocaleCodeChanged}">
         <f:selectItems value="#{language.countriesInMap}"/>
-    </p:selectOneMenu>
+    </h:selectOneMenu>
 </h:form>
 </body>
 </html>

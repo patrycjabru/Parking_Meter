@@ -8,6 +8,7 @@ import service.MessageStorage;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -54,7 +55,11 @@ public class Auth {
 
     public void changePassword(){
         if(!databaseController.changePassword(employee.getId(), oldPswd, newPswd)){
-            //TODO faces message
+            FacesContext.getCurrentInstance()
+                    .addMessage(null, new FacesMessage("Blad!", "Haslo niepoprawne" ));
+        }else{
+            FacesContext.getCurrentInstance()
+                    .addMessage(null, new FacesMessage("Sukces!", "Haslo zostalo zmienione!" ));
         }
     }
 

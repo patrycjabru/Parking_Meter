@@ -1,5 +1,6 @@
 package database;
 
+import entities.ParkingSpot;
 import entities.Ticket;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -53,5 +54,26 @@ public class TicketDAO {
             System.err.println("Error when trying to deleteById data from database: " + e);
             em.getTransaction().rollback();
         }
+    }
+
+    public static List<Ticket> getBySpotId(int spotId) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Ticket> query = cb.createQuery(Ticket.class);
+        Root<Ticket> hh = query.from(Ticket.class);
+        List<Predicate> predicates = new LinkedList<Predicate>();
+
+        predicates.add(cb.equal(hh.get("parkingSpot"), spotId));
+
+        query.where(predicates.toArray(new Predicate[] {}));
+
+        List<Ticket> tickets = new LinkedList<Ticket>();
+        try {
+            TypedQuery<Ticket> q = em.createQuery(query);
+            tickets = q.getResultList();
+        }
+        catch (Exception e) {
+            System.err.println("Error when trying to retrieve data from database: " + e);
+        }
+        return tickets;
     }
 }

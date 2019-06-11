@@ -139,7 +139,8 @@ public class ParkingSpotDAO {
     }
 
     public static boolean checkIfPaid(ParkingSpot spot) {
-        List<Ticket> tickets = spot.getTickets();
+//        List<Ticket> tickets = spot.getTickets();
+        List<Ticket> tickets = TicketDAO.getBySpotId(spot.getId());
         Date now = new Date();
         for (Ticket t : tickets) {
             if (t.getEndTime().after(now))

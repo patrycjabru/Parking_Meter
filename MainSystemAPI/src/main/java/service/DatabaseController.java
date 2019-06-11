@@ -10,7 +10,7 @@ public interface DatabaseController {
 
     Employee getEmployeeByName(String name);
     List<UISpot> getParkingStatus(Employee employee);
-    void changePassword(int employeeId, String oldPassword, String newPassword);
+    boolean changePassword(int employeeId, String oldPassword, String newPassword);
     List<Zone> getZonesWithoutEmployee();
     void addEmployee(String newUserLogin, String newUserPassword, int pickedZoneID);
     List<Employee> getEmployees();

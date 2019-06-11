@@ -34,10 +34,10 @@ public class DatabaseControllerBean implements DatabaseControllerLocal, Database
         }
     }
 
-    public void changePassword(int employeeId, String oldPassword, String newPassword){
+    public boolean changePassword(int employeeId, String oldPassword, String newPassword){
         String hashedOldPassword = Hash.hashMD5(oldPassword);
         String hashedNewPassword = Hash.hashMD5(newPassword);
-        EmployeeDAO.updatePassword(employeeId, hashedOldPassword, hashedNewPassword);
+        return EmployeeDAO.updatePassword(employeeId, hashedOldPassword, hashedNewPassword);
     }
 
     public List<Zone> getZonesWithoutEmployee(){

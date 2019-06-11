@@ -7,6 +7,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Stateless
 @WebService
@@ -24,5 +26,9 @@ public class SpotService{
     @WebMethod(operationName = "updateSpotFree")
     public void updateSpotFree(int spot_id) {
         ParkingSpotDAO.setSpotAsFree(spot_id);
+        Date modifyDate = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        String dateString = formatter.format(modifyDate);
+        alertManager.send("date:"+dateString);
     }
 }

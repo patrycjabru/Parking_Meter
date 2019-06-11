@@ -4,6 +4,8 @@ import database.ParkingSpotDAO;
 import entities.ParkingSpot;
 import service.AlertManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimerTask;
 
 public class CheckSpotForAlertsTimerTask extends TimerTask {
@@ -21,5 +23,9 @@ public class CheckSpotForAlertsTimerTask extends TimerTask {
         if (ValidateNotification.isAlertValid(spot)) {
             alertManager.alert(spot);
         }
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        String dateString = formatter.format(date);
+        alertManager.send("date:"+dateString);
     }
 }

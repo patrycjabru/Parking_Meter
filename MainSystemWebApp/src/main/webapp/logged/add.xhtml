@@ -11,11 +11,20 @@
 <h1>#{msg['edit.title']}</h1>
 
     <h:form>
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+    </h:form>
+
+    <h:form>
         #{msg['edit.oldPswd']}
         <h:inputSecret id="oldPswd" value="#{auth.oldPswd}" required="true"/>
         #{msg['edit.newPswd']}
         <h:inputSecret id="newPswd" value="#{auth.newPswd}" required="true"/>
-        <h:commandButton value="#{msg['edit.changePswd']}" type="submit" action="#{auth.changePassword}"/>
+
+        <h:commandButton value="#{msg['edit.changePswd']}" type="submit" >
+                <f:ajax event="click" execute="@form" listener="#{auth.changePassword}"/>
+        </h:commandButton>
     </h:form>
 
     <h:form rendered="#{auth.employee.isAdmin}">
@@ -28,7 +37,9 @@
             <f:selectItems value="#{edit.availableZones}" var="zone" itemLabel="#{zone.id}" itemValue="#{zone.id}"/>
         </h:selectOneMenu>
 
-        <h:commandButton value="#{msg['edit.addNewEmp']}" type="submit" action="#{edit.addEmployee}"/>
+        <h:commandButton value="#{msg['edit.addNewEmp']}" type="submit">
+            <f:ajax event="click" execute="@form" listener="#{edit.addEmployee}"/>
+        </h:commandButton>
     </h:form>
 
     <h:form rendered="#{auth.employee.isAdmin}">
@@ -41,7 +52,9 @@
             <f:selectItems value="#{edit.availableZones}" var="zone" itemLabel="#{zone.id}" itemValue="#{zone.id}"/>
         </h:selectOneMenu>
 
-        <h:commandButton value="#{msg['edit.changeZone']}" type="submit" action="#{edit.changeZone}"/>
+        <h:commandButton value="#{msg['edit.changeZone']}" type="submit">
+            <f:ajax event="click" execute="@form" listener="#{edit.changeZone}"/>
+        </h:commandButton>
     </h:form>
 
 <h:form>
@@ -50,5 +63,10 @@
         <f:selectItems value="#{language.countriesInMap}"/>
     </p:selectOneMenu>
 </h:form>
+
+<h:form >
+    <h:commandButton value="#{msg['edit.dashboard']}" type="submit" action="/logged/index.xhtml" />
+</h:form>
+
 </body>
 </html>
